@@ -33,15 +33,31 @@ public class Receta implements Serializable{
     private Double precio;
     private Integer duracionEstimada;
 
+    @ManyToOne
+    @JoinColumn(name = "id_autor")
+    // TODO Completar mapeo de relacion
+    private Autor autor;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_pedido")
+    private Pedido pedido;
+
+    @ManyToMany
+    @JoinTable(name = "receta_ingredientes", joinColumns = @JoinColumn(name = "id_receta"),
+               inverseJoinColumns = @JoinColumn(name = "id_ingredientes"))
+     // TODO Completar mapeo de relacion
+    private List<Ingrediente> ingredientes;
     
     // TODO Completar mapeo de fecha
     private Date fechaCreacion;
 
-    // TODO Completar mapeo de relacion
-    private List<Ingrediente> ingredientes;
-    
-    // TODO Completar mapeo de relacion
-    private Autor autor;
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }      
     
     public Integer getId() {
         return id;

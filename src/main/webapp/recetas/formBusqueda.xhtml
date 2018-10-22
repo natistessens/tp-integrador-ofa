@@ -4,21 +4,35 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui">
 
-    <h:form id="frmDatosAutores">
+<h:form id="formBusquedaAvanzada">
         <div class="p-grid">
             <div class="p-col-12" >
-                <h2>Informacion de Autor</h2>
+                <h2>Busqueda avanzada de recetas</h2>
             </div>
-            <div class="p-col-2" >
-                <p:outputLabel for="nombreAutor" value="Nombre Autor:" />
-                <p:inputText id="nombreAutor" required="true" value="#{autorController.autorSeleccionado.nombre}" disabled="#{empty autorController.autorSeleccionado}"/>
+            <div class="p-col-12" >
+                <p:outputLabel for="precioMin" value="Precio Mínimo" />
             </div>
-            <div class="p-col-2" >
-                <p:commandButton value="Guardar" action="#{autorController.guardar}" update="frmDatosAutores frmListaAutores" disabled="#{empty autorController.autorSeleccionado}"></p:commandButton>
+            <div class="p-col-12" >
+                <p:inputText id="precioMin" required="false"/>
             </div>
-            <div class="p-col-3" >
-                <p:commandButton value="Nuevo" action="#{autorController.nuevo()}" update="frmDatosAutores" disabled="#{not empty autorController.autorSeleccionado}"></p:commandButton>
-            </div>                
+            <div class="p-col-12" >
+                <p:outputLabel for="precioMax" value="Precio Máxima" />
+            </div>
+            <div class="p-col-12" >
+                <p:inputText id="precioMax" required="false"/>
+            </div>
+            <div class="p-col-12" >
+                <p:outputLabel for="fechaMin" value="Fecha Mínima" />
+            </div>
+            <div class="p-col-12" >
+                <p:calendar id="fechaMin" required="false"/>                    
+            </div>
+            <div class="p-col-12" >
+                <p:outputLabel for="fechaMax" value="Fecha Máxima" />
+            </div>
+            <div class="p-col-12" >
+                <p:calendar id="fechaMax" required="false"/>
+            </div>
         </div>
     </h:form>
 </ui:composition>

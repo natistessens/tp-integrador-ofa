@@ -22,12 +22,15 @@ public class IngredienteService {
     private EntityManager em;
 
     public Ingrediente guardar(Ingrediente a) {
-        // TODO: completar metodo
-        // si el ingrediente tiene seteado un ID realiza merge
-        // caso contrario realiza un persist
+        if(a.getId()!=null && a.getId()>0) {
+             return em.merge(a);        }
+        em.persist(a);
+        em.flush();
+        em.refresh(a);
         return a;
-    }
 
+    }
+    
     public List<Ingrediente> listar() {
         return em.createQuery("SELECT i FROM Ingrediente i").getResultList();
     }

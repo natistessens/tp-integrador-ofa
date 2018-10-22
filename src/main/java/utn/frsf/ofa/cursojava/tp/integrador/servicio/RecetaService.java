@@ -5,12 +5,14 @@
  */
 package utn.frsf.ofa.cursojava.tp.integrador.servicio;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import utn.frsf.ofa.cursojava.tp.integrador.logica.RecetaLogica;
 import utn.frsf.ofa.cursojava.tp.integrador.modelo.Ingrediente;
 import utn.frsf.ofa.cursojava.tp.integrador.modelo.Receta;
@@ -51,7 +53,42 @@ public class RecetaService {
     }
     
     public List<Receta> busquedaAvanzada(AutorService a, Ingrediente i, Double precioMin, Double precioMax,Date fMin,Date fMax){        
-        return null;
+                String queryStr = "SELECT r FROM Receta r WHERE r.id > 0";
+        if (precioMin != null) {
+            queryStr += " AND r.precio >= :PRECIO_MIN";
+        }
+        if (precioMax != null) {
+            queryStr += " AND r.precio <= :PRECIO_MAX";
+        }
+        if (fMin != null) {
+            queryStr += " AND r.fechaCreacion >= :FECHA_MIN";
+        }
+        if (fMax != null) {
+            queryStr += " AND r.fechaCreacion <= :FECHA_MAX";
+        }
+        if (a != null) {
+            queryStr += " AND r.autor.id = :ID_AUTOR";
+        }
+
+        List<Receta> retorno = new ArrayList<Receta>();
+        Query query = em.createQuery(queryStr);
+        if (precioMin != null) {
+            query.setParameter("PRECIO_MIN", precioMin);
+        }
+        if (precioMax != null) {
+            query.setParameter("PRECIO_MAX", precioMax);
+        }
+        if (fMin != null) {
+            query.setParameter("FECHA_MIN", fMin);
+        }
+        if (fMax != null) {
+            query.setParameter("FECHA_MAX", fMax);
+        }
+        if (a != null) {
+            query.setParameter("ID_AUTOR", a);
+        }
+        retorno = query.getResultList();
+        return retorno;
     }
 
 }

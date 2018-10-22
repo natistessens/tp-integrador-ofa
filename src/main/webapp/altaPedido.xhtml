@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="./template01.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="frmPedido">
+            <div class="p-grid">
+                <div class="p-col-12" >
+                    <h2>Gestión de Pedidos</h2>
+                </div>
+                <div class="p-col-4" >
+                    <p:outputLabel for="direccionEnvio" value="Direccion Envio:" />
+                </div>
+                <div class="p-col-8" >
+                    <p:inputText id="direccionEnvio" required="true" value="#{pedidoController.pedidoSeleccionado.direccionEnvio}" disabled="#{empty pedidoController.pedidoSeleccionado}"/>
+                </div>
+                <div class="p-col-4" >
+                    <p:outputLabel for="fecha" value="Fecha:" />
+                </div>
+                <div class="p-col-8" >
+                    <p:inputMask id="fecha" value="#{pedidoController.pedidoSeleccionado.fechaPedido}" disabled="#{empty pedidoController.pedidoSeleccionado}"  mask="99/99/9999" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </p:inputMask>
+                </div>
+                <div class="p-col-3" >
+                    <p:commandButton value="Guardar" action="#{pedidoController.guardar()}" ajax="false" disabled="#{empty pedidoController.pedidoSeleccionado}"></p:commandButton>
+                </div>
+                <div class="p-col-12" >
+                    <p:commandButton value="Nuevo" action="#{pedidoController.nuevo}" update="frmPedido" disabled="#{not empty pedidoController.pedidoSeleccionado}"></p:commandButton>
+                </div>  
+
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

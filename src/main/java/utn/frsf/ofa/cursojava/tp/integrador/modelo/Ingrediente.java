@@ -25,6 +25,7 @@ public class Ingrediente implements Serializable{
     private String descripcion;
     private Double costo;
 
+    @ManyToMany(mappedBy = "ingredientes")   
     // TODO Completar mapeo de relacion
     private List<Receta> usadoEnRecetas;
     
